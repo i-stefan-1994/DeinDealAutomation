@@ -67,7 +67,11 @@ public class FoodDeliveryPage extends BasePageMethods {
 
     public boolean checkIfButtonEnabled(){
         log.info("Checking to see if the button is enabled");
-        waitForVisibilityOf(buttonLocator, 10);
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return elementEnablement(buttonLocator);
     }
 
