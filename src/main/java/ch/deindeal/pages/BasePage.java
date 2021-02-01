@@ -7,10 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BasePage {
     protected WebDriver driver;
@@ -42,8 +42,14 @@ public class BasePage {
      * @param locator
      * @return
      */
-    protected List<WebElement> findElements(By locator){
-        return driver.findElements(locator);
+    protected List<String> findElements(By locator){
+        waitForVisibilityOf(locator);
+        List<String> idList = driver.findElements(locator).stream().map(id -> id.getAttribute("id")).collect(Collectors.toList());
+//        for(String id: idList){
+//            String [] something = id.split("link-one-sale-link-");
+//            System.out.println(something[1]);
+//        }
+        return idList;
     }
 
     /**
@@ -61,7 +67,7 @@ public class BasePage {
      * @param locator
      */
     protected void click(By locator){
-        waitForVisibilityOf(locator, 5);
+//        waitForVisibilityOf(locator, 5);
         find(locator).click();
     }
 

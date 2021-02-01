@@ -36,6 +36,7 @@ public class FoodDeliveryPageTest extends TestUtilities {
         boolean offersInList = foodDeliveryPage.checkListEnablement();
         Assert.assertTrue(offersInList);
         foodDeliveryPage.saveFilterValue();
+        //Saves the id's of elements found in the recommended section
         foodDeliveryPage.saveElements();
         int actualResponseCode = foodDeliveryPage.makeApiCall();
         Assert.assertEquals(actualResponseCode, 200);

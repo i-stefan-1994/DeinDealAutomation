@@ -1,17 +1,14 @@
 package ch.deindeal.pages;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.get;
-import static io.restassured.RestAssured.given;
 
 public class FoodDeliveryPage extends BasePage{
 
@@ -21,14 +18,14 @@ public class FoodDeliveryPage extends BasePage{
     private By searchFieldLocator = By.className("InputLocation");
     private By dropdownLocator = By.className("Button__prediction-item");
     private By foodFilterLocator = By.xpath("//div[@class='FoodFilters__wrapper']//button[@type='button']");
-    private By offersFilterLocator = By.xpath("/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[5]/div[1]/label[1]/span[1]");
+    private By healthyFilterLocator = By.xpath("//label[@class='Input__label--radio food-popular-filter']//span[@class='Input__label-content'][contains(text(),'Healthy')]");
     private By offerInListLocator = By.xpath("/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[1]/ul[1]/li[5]/div[1]/label[1]/span[1]");
-    private By savedElementsLocator = By.xpath("//div[@class='SalesList']");
+    private By savedElementsLocator = By.xpath("//div[@class='SalesList']//div[@class='SalesList__list']//a[@*]");
     private String apiCall = "https://testfoodios.herokuapp.com/food_city/";
     private String cityId;
     private String filterValue;
     private int response;
-    private List<WebElement> savedElements;
+    private List<String> savedElements = new ArrayList<>();
 
     public FoodDeliveryPage(WebDriver driver, Logger log) {
         super(driver, log);
@@ -104,7 +101,7 @@ public class FoodDeliveryPage extends BasePage{
      */
     public void clickOffersFilter(){
         log.info("Clicking on the offers filter");
-        click(offersFilterLocator);
+        click(healthyFilterLocator);
     }
 
     /**
@@ -124,6 +121,7 @@ public class FoodDeliveryPage extends BasePage{
         String currentUrl = getCurrentUrl();
         String[] filtervalue = currentUrl.split("sortBy=");
         this.filterValue = filtervalue[1];
+        System.out.println(this.filterValue);
         log.info("Filter saved as " + this.filterValue);
     }
 
@@ -131,10 +129,13 @@ public class FoodDeliveryPage extends BasePage{
      * Returns saved elements
      * @return
      */
-    public List<WebElement> saveElements(){
+    public void saveElements(){
         log.info("Saving all elements in the given locator");
-        this.savedElements = findElements(savedElementsLocator);
-        return this.savedElements;
+        List<String> element = findElements(savedElementsLocator);
+            for(String individualId: element){
+                this.savedElements.add(individualId);
+                System.out.println("Id saved: " + individualId);
+            }
     }
 
     public int makeApiCall(){
