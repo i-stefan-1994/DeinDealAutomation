@@ -18,7 +18,7 @@ public class FoodDeliveryPageTest extends TestUtilities {
         Assert.assertTrue(foodDeliveryPage.checkIfUrlEndsWithGivenString("restaurant/"));
 
         foodDeliveryPage.selectZurich();
-        sleep(3000);
+//        sleep(3000);
         foodDeliveryPage.saveCityId();
 
         Assert.assertFalse(foodDeliveryPage.checkIfButtonEnabled());

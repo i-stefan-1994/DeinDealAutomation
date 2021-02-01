@@ -1,22 +1,20 @@
 package ch.deindeal.pages;
 
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BasePage {
+public class BasePageMethods {
     protected WebDriver driver;
     protected Logger log;
 
-    public BasePage(WebDriver driver, Logger log) {
+    public BasePageMethods(WebDriver driver, Logger log) {
         this.driver = driver;
         this.log = log;
     }
@@ -45,20 +43,7 @@ public class BasePage {
     protected List<String> findElements(By locator){
         waitForVisibilityOf(locator);
         List<String> idList = driver.findElements(locator).stream().map(id -> id.getAttribute("id")).collect(Collectors.toList());
-//        for(String id: idList){
-//            String [] something = id.split("link-one-sale-link-");
-//            System.out.println(something[1]);
-//        }
         return idList;
-    }
-
-    /**
-     * Finds all elements by given locator
-     * @param locator
-     * @return
-     */
-    protected List<WebElement> findAll(By locator){
-        return driver.findElements(locator);
     }
 
 
@@ -144,7 +129,26 @@ public class BasePage {
     public boolean checkIfElementIsSelectedByVisibleText(By locator){
         WebElement listElement = find(locator);
         return listElement.isEnabled();
+    }
 
+    /**
+     * Select given element by value
+     * @param dropdownelement
+     * @param value
+     */
+    public void selectOption(By dropdownelement, String value){
+        WebElement dropdownElement = find(dropdownelement);
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByValue(value);
+    }
 
+    /**
+     * Sends given keys to locator
+     * @param keys
+     * @param locator
+     */
+    public void sendKeys(Keys keys, By locator){
+        WebElement webElement = find(locator);
+        webElement.sendKeys(keys);
     }
 }

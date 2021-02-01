@@ -8,8 +8,6 @@ public class MainPageTest extends TestUtilities {
 
     @Test
     public void clickFoodDelivery(){
-        log.info("Selecting food delivery");
-
         MainPage mainPage = new MainPage(driver, log);
 
         //Navigating to "https://deindeal.ch/fr/"
@@ -17,6 +15,7 @@ public class MainPageTest extends TestUtilities {
 
         //Clicking on Food Delivery
         mainPage.clickFoodDelivery();
+
     }
 
 }

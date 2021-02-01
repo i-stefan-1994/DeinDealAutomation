@@ -6,8 +6,10 @@
 <!--            </run>-->
 <!--        </groups>-->
         <classes>
-            <class name="ch.deindeal.tests.MainPageTest" />
-            <class name="ch.deindeal.tests.FoodDeliveryPageTest"/>
+<!--            <class name="ch.deindeal.tests.MainPageTest" />-->
+<!--            <class name="ch.deindeal.tests.FoodDeliveryPageTest"/>-->
+<!--            <class name = "ch.deindeal.tests.RegisterTest" />-->
+            <class name = "ch.deindeal.tests.PayPalTest"/>
         </classes>
     </test>
 </suite>

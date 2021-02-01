@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.get;
+import static java.lang.Thread.sleep;
 
-public class FoodDeliveryPage extends BasePage{
+public class FoodDeliveryPage extends BasePageMethods {
 
     private String url = "https://www.deindeal.ch/fr/restaurant/";
     private By zurichCityLocator = By.cssSelector("div.Layout:nth-child(3) div.Food div.Food__cities ul.Food__cities-list li.Food__city-wrapper:nth-child(2) a.Link > img.Food__city-image");
@@ -48,6 +49,11 @@ public class FoodDeliveryPage extends BasePage{
 
     public void saveCityId(){
         log.info("Saving city id");
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String currentUrl = getCurrentUrl();
         String[] cityUrl = currentUrl.split("restaurant/");
         this.cityId = cityUrl[1];
@@ -145,5 +151,6 @@ public class FoodDeliveryPage extends BasePage{
         this.response = get().getStatusCode();
         return this.response;
     }
+
 
 }
