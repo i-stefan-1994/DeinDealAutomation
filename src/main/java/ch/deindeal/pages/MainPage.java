@@ -26,57 +26,95 @@ public class MainPage extends BasePageMethods {
     }
 
 
+    /**
+     * Types given mail String in the register section
+     * @param email
+     */
     public void typeLoginEmail(String email){
         waitForVisibilityOf(registerPasswordLocator, 15);
         type(email, registerMailLocator);
     }
 
+    /**
+     * Types given password String in the register section
+     * @param password
+     */
     public void typeLoginPassword(String password){
         click(registerPasswordLocator);
         type(password, registerPasswordLocator);
     }
 
+    /**
+     * Logs into the register section
+     */
     public void clickOnLogin(){
         click(registerConnectLocator);
     }
 
 
+    /**
+     * Opens given page
+     */
     public void openPage(){
         log.info("Opening page " + pageUrl);
         openUrl(pageUrl);
         log.info("Page opened!");
     }
 
+    /**
+     * Clicks on the delivery button
+     * @return
+     */
     public FoodDeliveryPage clickFoodDelivery(){
         log.info("Clicking on Food Delivery");
         click(foodDeliveryLocator);
         return new FoodDeliveryPage(driver, log);
     }
 
+    /**
+     * Clicks on the connect button
+     */
     public void clickOnConnect(){
         log.info("Clicking on register");
         click(connectLocator);
     }
 
+    /**
+     * Clicks on the new account button
+     */
     public void clickOnNewAccount(){
         waitForVisibilityOf(newAccountLocator, 10);
         log.info("Clicking on new account");
         click(newAccountLocator);
     }
 
+    /**
+     * Types given password and mail String into the register section
+     * @param mail
+     * @param password
+     */
     public void register(String mail, String password){
         type(mail, mailLocator);
         type(password, passwordLocator);
     }
 
+    /**
+     * Selects given city
+     */
     public void selectCity(){
         selectOption(citySelectLocator, "basel");
     }
 
+    /**
+     * Selects given sex
+     */
     public void selectSex(){
         sendKeys(Keys.SPACE, sexSelectLocator);
     }
 
+    /**
+     * Clicks on submit button on the registry page
+     */
     public void submitRegistry(){
         click(submitRegistryLocator);
         try {
