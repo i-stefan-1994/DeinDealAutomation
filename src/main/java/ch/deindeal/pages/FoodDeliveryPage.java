@@ -148,6 +148,10 @@ public class FoodDeliveryPage extends BasePageMethods {
             }
     }
 
+    /**
+     * Returns status code of the given URL
+     * @return
+     */
     public int makeApiCall(){
         String apiCall = this.apiCall + cityId + ".com";
         RestAssured.baseURI = apiCall;
